@@ -1,27 +1,25 @@
-/*TB - 02
-Group DeepSeek*/
-
 #ifndef STACK_QUEUE_H
 #define STACK_QUEUE_H
 
-// Node structure for Dynamic Stack
-struct StackNode {
-    int data;
-    StackNode* next;
-};
+#include <iostream>
+using namespace std;
 
-// Dynamic Stack class
-class DynamicStack {
+
+class StaticQueue { //Class Declaration
 private:
-    StackNode* top;
+    static const int MAX = 10; // Maximum size
+    int arr[MAX]; //store queue elements.
+    int front; // Index of the first element in the queue.
+    int rear; //Index of the last element in the queue
+    int count; //Number of current elements in the queue
 
 public:
-    DynamicStack();               // Constructor
-    ~DynamicStack();              // Destructor
-    void push(int value);        // Push an element onto the stack
-    void pop();                  // Pop an element from the stack
-    void display();              // Display stack contents
-    bool isEmpty();              // Check if the stack is empty
+    StaticQueue();   // Constructor
+    void enqueue(int value);  //Adds an item to the end of the queue.
+    void dequeue(); //Removes an item from the front.          
+    void display();   //Display queue       
+    bool isEmpty();  //check if queue is empty        
+    bool isFull();   //check if queue is full        
 };
 
 #endif

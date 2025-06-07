@@ -1,61 +1,50 @@
-/*TB - 02
-Group DeepSeek*/
+#include "static_queue.h"
 
-#include <iostream>
-#include "stack_queue.h"
-
-using namespace std;
-
-// Constructor
-DynamicStack::DynamicStack() {
-    top = nullptr;
+StaticQueue::StaticQueue() { //constructor
+    front = 0;
+    rear = -1;
+    count = 0;
 }
 
-// Destructor to free memory
-DynamicStack::~DynamicStack() {
-    while (!isEmpty()) {
-        pop();
-    }
+bool StaticQueue::isEmpty() { //check if queue is empty
+    return count == 0;
 }
 
-// Push an element onto the stack
-void DynamicStack::push(int value) {
-    StackNode* newNode = new StackNode;
-    newNode->data = value;
-    newNode->next = top;
-    top = newNode;
-    cout << value << " pushed onto the dynamic stack.\n";
+bool StaticQueue::isFull() { //check if queue is full  
+    return count == MAX;
 }
 
-// Pop an element from the stack
-void DynamicStack::pop() {
-    if (isEmpty()) {
-        cout << "Dynamic stack underflow! Nothing to pop.\n";
+void StaticQueue::enqueue(int value) { //Adds an item to the end of the queue
+    if (isFull()) {
+        cout << "Queue Overflow! Cannot enqueue " << value << ".\n";
         return;
     }
-    StackNode* temp = top;
-    cout << temp->data << " popped from the dynamic stack.\n";
-    top = top->next;
-    delete temp;
+    rear = (rear + 1) % MAX; // Circular behavior to avoid unnecessary shifting or reallocation
+    arr[rear] = value; 
+    count++;
+    cout << value << " enqueued into the queue.\n";
 }
 
-// Display stack contents
-void DynamicStack::display() {
+void StaticQueue::dequeue() { //Removes an item from the front.
     if (isEmpty()) {
-        cout << "Dynamic stack is empty.\n";
+        cout << "Queue Underflow! Cannot dequeue.\n";
+        return;
+    }
+    cout << arr[front] << " dequeued from the queue.\n";
+    front = (front + 1) % MAX; 
+    count--;
+}
+
+void StaticQueue::display() { //Display queue      
+    if (isEmpty()) {
+        cout << "Queue is empty.\n";
         return;
     }
 
-    cout << "Dynamic stack contents (top to bottom): ";
-    StackNode* current = top;
-    while (current != nullptr) {
-        cout << current->data << " ";
-        current = current->next;
+    cout << "Queue elements: "; 
+    for (int i = 0; i < count; i++) {
+        int index = (front + i) % MAX;
+        cout << arr[index] << " ";
     }
     cout << endl;
-}
-
-// Check if stack is empty
-bool DynamicStack::isEmpty() {
-    return top == nullptr;
 }
