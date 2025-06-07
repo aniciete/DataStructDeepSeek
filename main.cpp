@@ -1,44 +1,51 @@
-/*TB - 02
-Group DeepSeek*/
+// main.cpp
+// This file is where the program starts and the user interacts with the menu
 
-#include <iostream>
 #include "stack_queue.h"
 
-using namespace std;
-
 int main() {
-    DynamicStack ds;
+    StaticStack s;  // Create a stack object
     int choice, value;
 
+    // This loop keeps running until the user chooses to exit (choice = 4)
     do {
-        cout << "\n=== Dynamic Stack Menu ===\n";
-        cout << "1. Push\n";
-        cout << "2. Pop\n";
-        cout << "3. Display\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
+        // Display menu options
+        cout << "=============================================" << endl;
+        cout << "              STATIC STACK MENU" << endl;
+        cout << "============================================="<< endl;
+        cout << "       1. Push" << endl;
+        cout << "       2. Pop" << endl;
+        cout << "       3. Display Stack" << endl;
+        cout << "       4. Exit" << endl;
+        cout << endl; 
+        cout << "   Choose option: "; 
         cin >> choice;
+        cout << "_____________________________________________" << endl; 
 
+        // Menu selection
         switch (choice) {
             case 1:
-                cout << "Enter value to push: ";
+                cout << "\nEnter value to push: ";
                 cin >> value;
-                ds.push(value);
+                s.push(value); // Call push function
                 break;
             case 2:
-                ds.pop();
+                s.pop();       // Call pop function
                 break;
             case 3:
-                ds.display();
+                s.display();   // Call display function
                 break;
             case 4:
-                cout << "Exiting dynamic stack demo.\n";
+                cout << "\nExiting program..." << endl;
                 break;
             default:
-                cout << "Invalid choice. Try again.\n";
+                cout << "\n[!] Invalid option. Try again." << endl;
         }
 
-    } while (choice != 4);
+        cout << "\n---------------------------------------------\n" << endl;
+
+    } while (choice != 4); // Keeps looping unless user chooses 4 (exit)
 
     return 0;
 }
+
